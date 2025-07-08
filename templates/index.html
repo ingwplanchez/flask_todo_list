@@ -18,11 +18,15 @@
         </form>
 
         <ul class="list-group">
-            {% if tasks %} {# Comprueba si hay tareas para mostrar #}
+            {% if tasks %}
                 {% for task in tasks %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ task }}
-                    </li>
+                    <span>{{ task.content }}</span> {# Ahora accedemos a 'content' del diccionario #}
+                    <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                    {# Creamos un enlace que apunta a nuestra nueva ruta de eliminación #}
+                    {# 'delete_task' es el nombre de la función en app.py #}
+                    {# 'task_id=task.id' le pasa el ID de la tarea actual a esa función #}
+                </li>
                 {% endfor %}
             {% else %}
                 <li class="list-group-item text-center text-muted">No hay tareas aún. ¡Añade una!</li>
