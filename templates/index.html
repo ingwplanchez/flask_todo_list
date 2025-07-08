@@ -8,7 +8,7 @@
     <style>
         .completed {
             text-decoration: line-through;
-            color: #6c757d; /* Color gris de Bootstrap */
+            color: #6c757d;
         }
     </style>
 </head>
@@ -32,12 +32,17 @@
                            class="btn btn-sm {% if task.completed %}btn-secondary{% else %}btn-success{% endif %} me-2"
                            title="{% if task.completed %}Marcar como Pendiente{% else %}Marcar como Completada{% endif %}">
                            {% if task.completed %}
-                            <i class="bi bi-arrow-counterclockwise"></i> &#x21BA; {% else %}
-                            <i class="bi bi-check-lg"></i> &#10003; {% endif %}
+                            &#x21BA;
+                           {% else %}
+                            &#10003;
+                           {% endif %}
                         </a>
                         <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
                     </div>
-                    <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <div>
+                        <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-info btn-sm me-2">Editar</a>
+                        <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </div>
                 </li>
                 {% endfor %}
             {% else %}
