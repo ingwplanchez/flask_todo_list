@@ -4,10 +4,9 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# --- Base de datos de tareas (ahora con campo 'completed') ---
-# Cada tarea es un diccionario: {'id': 1, 'content': 'Aprender Flask', 'completed': False}
+# --- Base de datos de tareas (ya tiene id, content, completed) ---
 tasks = []
-next_task_id = 1 # Usaremos esto para asegurar que los IDs sean únicos y crecientes.
+next_task_id = 1
 
 # --- Rutas de la Aplicación ---
 
@@ -18,13 +17,13 @@ def index():
 @app.route('/add', methods=['POST'])
 def add_task():
     global tasks
-    global next_task_id # Necesitamos acceder a esta variable global para incrementarla
+    global next_task_id
 
     if request.method == 'POST':
         task_content = request.form['content'].strip()
         if task_content:
             tasks.append({'id': next_task_id, 'content': task_content, 'completed': False})
-            next_task_id += 1 # Incrementamos el ID para la próxima tarea
+            next_task_id += 1
 
     return redirect(url_for('index'))
 
@@ -39,8 +38,34 @@ def complete_task(task_id):
     global tasks
     for task in tasks:
         if task['id'] == task_id:
-            task['completed'] = not task['completed'] # Alterna el estado (True a False, False a True)
-            break # Una vez que encontramos la tarea, podemos salir del bucle
+            task['completed'] = not task['completed']
+            break
+    return redirect(url_for('index'))
+
+# --- Nueva ruta para mostrar el formulario de edición ---
+@app.route('/edit/<int:task_id>')
+def edit_task(task_id):
+    requested_task = None
+    for task in tasks:
+        if task['id'] == task_id:
+            requested_task = task
+            break
+    if not requested_task:
+        # Si la tarea no se encuentra, redirigir al inicio o mostrar un error
+        return redirect(url_for('index'))
+    return render_template('edit.html', task=requested_task)
+
+# --- Nueva ruta para procesar el formulario de edición (POST) ---
+@app.route('/update/<int:task_id>', methods=['POST'])
+def update_task(task_id):
+    global tasks
+    if request.method == 'POST':
+        updated_content = request.form['content'].strip()
+        if updated_content:
+            for task in tasks:
+                if task['id'] == task_id:
+                    task['content'] = updated_content # Actualiza el contenido de la tarea
+                    break
     return redirect(url_for('index'))
 
 # --- Ejecutar la Aplicación ---
