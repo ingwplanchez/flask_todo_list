@@ -38,7 +38,8 @@ class Task(db.Model):
 def index():
     # Ahora obtenemos todas las tareas de la base de datos
     # .all() recupera todos los objetos Task de la tabla
-    tasks = Task.query.order_by(Task.id.desc()).all() # Ordena por ID descendente para ver las nuevas arriba
+    # Ahora ordena por ID ascendente para que la tarea más antigua (ID más bajo) aparezca primero.
+    tasks = Task.query.order_by(Task.id.asc()).all()
     return render_template('index.html', tasks=tasks)
 
 @app.route('/add', methods=['POST'])
