@@ -1,10 +1,16 @@
+-----
+
+Archivo `README.md` ajustado para reflejar la existencia de la rama `db-integration` para la base de datos, mientras que `main` usa un diccionario.
+
+-----
+
 # flask\_todo\_list: Un Sencillo Gestor de Tareas con Flask
 
 ## Descripción del Proyecto
 
 `flask_todo_list` es una aplicación web minimalista diseñada para ayudarte a gestionar tus tareas diarias. Permite añadir, listar, marcar como completadas, editar y eliminar tareas de forma sencilla. El proyecto está construido utilizando el microframework **Flask** para el backend y una interfaz de usuario básica para el frontend.
 
-Este repositorio documenta el progreso del desarrollo de la aplicación, siguiendo una serie de pasos que construyen la funcionalidad gradualmente.
+Este repositorio documenta el progreso del desarrollo de la aplicación, ofreciendo distintas aproximaciones para la persistencia de datos a través de sus ramas.
 
 ## Características y Funcionalidades
 
@@ -17,22 +23,46 @@ Hasta el momento, `flask_todo_list` incluye las siguientes características clav
           * **Marcar como Completadas:** Cambia el estado de una tarea a "completada" con un solo clic, tachando su texto para una clara distinción visual.
           * **Editar:** Modifica el contenido de una tarea existente.
       * **Eliminar:** Borra tareas de forma permanente de la lista.
-  * **Base de Datos Ligera:** Utiliza SQLite para almacenar las tareas de forma local, proporcionando una solución de persistencia simple y eficaz.
+  * **Múltiples Opciones de Persistencia de Datos:** El proyecto ofrece distintas implementaciones para el almacenamiento de tareas, accesibles a través de sus ramas de Git.
 
 ## Tecnologías Utilizadas
 
   * **Backend:**
       * Python 3
       * Flask
-      * SQLAlchemy (ORM para la interacción con la base de datos)
+      * SQLAlchemy (ORM para la interacción con la base de datos, en la rama `db-integration`)
+      * SQLite (para la base de datos local, en la rama `db-integration`)
   * **Frontend:**
       * HTML5
       * CSS (estilos básicos)
       * JavaScript (para interacciones sencillas)
 
-## Pasos de Desarrollo Implementados
+-----
 
-Este proyecto ha sido desarrollado siguiendo los siguientes hitos:
+## Estructura de Ramas y Persistencia de Datos
+
+Este proyecto utiliza ramas de Git para ofrecer diferentes implementaciones de cómo se almacenan las tareas:
+
+  * **`main` (Rama Principal):**
+      * Esta rama maneja las tareas utilizando un **diccionario en memoria**. Esto significa que las tareas **no son persistentes**; se perderán cada vez que reinicies la aplicación o el servidor. Es ideal para pruebas rápidas y entender la lógica básica sin necesidad de configuración de base de datos.
+  * **`db-integration` (Rama de Integración de Base de Datos):**
+      * Esta rama implementa la persistencia de datos utilizando **SQLite como base de datos** y **SQLAlchemy** como ORM. Las tareas **sí son persistentes**; se guardarán entre reinicios de la aplicación. Es la versión recomendada para un uso más completo y duradero de la lista de tareas.
+
+Puedes cambiar entre las ramas usando comandos de Git:
+
+```bash
+# Para cambiar a la rama principal (diccionario en memoria):
+git checkout main
+
+# Para cambiar a la rama con integración de base de datos:
+git checkout db-integration
+```
+
+-----
+
+## Pasos de Desarrollo Implementados (en la rama `db-integration`)
+
+Los siguientes hitos de desarrollo se refieren a la implementación de la aplicación con la **integración de base de datos**:
 
 ### Paso 1: Configuración Inicial del Proyecto
 
@@ -62,9 +92,11 @@ Se añadió la capacidad de alternar el estado de una tarea entre "pendiente" y 
 
 Se implementó la ruta y la lógica necesarias para permitir a los usuarios editar el contenido de una tarea existente directamente desde la interfaz.
 
+-----
+
 ## Cómo Ejecutar el Proyecto Localmente
 
-Para poner en marcha `flask_todo_list` en tu máquina, sigue estas instrucciones:
+Para poner en marcha `flask_todo_list` en tu máquina, sigue estas instrucciones. Recuerda **seleccionar la rama** que deseas probar (`main` para el diccionario o `db-integration` para la base de datos).
 
 1.  **Clona el repositorio:**
 
@@ -75,13 +107,24 @@ Para poner en marcha `flask_todo_list` en tu máquina, sigue estas instrucciones
 
     (Asegúrate de reemplazar `tu-usuario/flask_todo_list.git` con la URL real de tu repositorio).
 
-2.  **Crea un entorno virtual (recomendado):**
+2.  **Elige y cambia a la rama deseada:**
+
+      * Para usar la versión con base de datos:
+        ```bash
+        git checkout db-integration
+        ```
+      * Para usar la versión con diccionario en memoria (la principal):
+        ```bash
+        git checkout main
+        ```
+
+3.  **Crea un entorno virtual (recomendado):**
 
     ```bash
     python -m venv venv
     ```
 
-3.  **Activa el entorno virtual:**
+4.  **Activa el entorno virtual:**
 
       * En Windows (CMD):
         ```bash
@@ -92,23 +135,23 @@ Para poner en marcha `flask_todo_list` en tu máquina, sigue estas instrucciones
         source venv/bin/activate
         ```
 
-4.  **Instala las dependencias:**
+5.  **Instala las dependencias:**
 
     ```bash
     pip install -r requirements.txt
     ```
 
-    (Asegúrate de tener un archivo `requirements.txt` en la raíz de tu proyecto con `Flask` y `Flask-SQLAlchemy` listados).
+    (Asegúrate de tener un archivo `requirements.txt` en la raíz de tu proyecto con `Flask` y `Flask-SQLAlchemy` para la rama `db-integration`. La rama `main` solo necesitará `Flask`).
 
-5.  **Inicializa la base de datos:**
+6.  **Si estás en la rama `db-integration`, inicializa la base de datos:**
 
     ```bash
     python -c "from app import db; db.create_all()"
     ```
 
-    (Este comando asume que tu archivo principal de Flask se llama `app.py` y que el objeto `db` de SQLAlchemy está definido en él).
+    (Este comando asume que tu archivo principal de Flask se llama `app.py` y que el objeto `db` de SQLAlchemy está definido en él. **Este paso solo es necesario en la rama `db-integration`**).
 
-6.  **Ejecuta la aplicación:**
+7.  **Ejecuta la aplicación:**
 
     ```bash
     flask run
@@ -132,7 +175,7 @@ Para poner en marcha `flask_todo_list` en tu máquina, sigue estas instrucciones
         flask run
         ```
 
-7.  **Accede a la aplicación:**
+8.  **Accede a la aplicación:**
     Abre tu navegador web y ve a `http://127.0.0.1:5000/`.
 
 ## Estructura del Proyecto (Ejemplo Típico)
@@ -142,7 +185,7 @@ flask_todo_list/
 ├── venv/                   # Entorno virtual de Python
 ├── app.py                  # Archivo principal de la aplicación Flask
 ├── requirements.txt        # Lista de dependencias de Python
-├── instance/               # Carpeta para archivos de instancia (ej. base de datos SQLite)
+├── instance/               # Carpeta para archivos de instancia (ej. base de datos SQLite, en `db-integration`)
 │   └── todo.db             # Nombre de tu archivo de base de datos
 ├── templates/
 │   ├── index.html          # Plantilla principal de la aplicación
@@ -154,4 +197,4 @@ flask_todo_list/
         └── script.js
 ```
 
-
+-----
