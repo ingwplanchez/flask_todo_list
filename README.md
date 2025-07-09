@@ -1,9 +1,3 @@
------
-
-Archivo `README.md` ajustado para reflejar la existencia de la rama `db-integration` para la base de datos, mientras que `main` usa un diccionario.
-
------
-
 # flask\_todo\_list: Un Sencillo Gestor de Tareas con Flask
 
 ## Descripción del Proyecto
