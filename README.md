@@ -1,14 +1,14 @@
-# flask\_todo\_list: Un Sencillo Gestor de Tareas con Flask
+# FlaskTasker: Un Sencillo Gestor de Tareas con Flask
 
 ## Descripción del Proyecto
 
-`flask_todo_list` es una aplicación web minimalista diseñada para ayudarte a gestionar tus tareas diarias. Permite añadir, listar, marcar como completadas, editar y eliminar tareas de forma sencilla. El proyecto está construido utilizando el microframework **Flask** para el backend y una interfaz de usuario básica para el frontend.
+`FlaskTasker` es una aplicación web minimalista diseñada para ayudarte a gestionar tus tareas diarias. Permite añadir, listar, marcar como completadas, editar y eliminar tareas de forma sencilla. El proyecto está construido utilizando el microframework **Flask** para el backend y una interfaz de usuario básica para el frontend.
 
 Este repositorio documenta el progreso del desarrollo de la aplicación, ofreciendo distintas aproximaciones para la persistencia de datos a través de sus ramas.
 
 ## Características y Funcionalidades
 
-Hasta el momento, `flask_todo_list` incluye las siguientes características clave:
+Hasta el momento, `FlaskTasker` incluye las siguientes características clave:
 
   * **Gestión Básica de Tareas (CRUD):**
       * **Crear:** Añade nuevas tareas a tu lista.
@@ -90,7 +90,7 @@ Se implementó la ruta y la lógica necesarias para permitir a los usuarios edit
 
 ## Cómo Ejecutar el Proyecto Localmente
 
-Para poner en marcha `flask_todo_list` en tu máquina, sigue estas instrucciones. Recuerda **seleccionar la rama** que deseas probar (`main` para el diccionario o `db-integration` para la base de datos).
+Para poner en marcha `FlaskTasker` en tu máquina, sigue estas instrucciones. Recuerda **seleccionar la rama** que deseas probar (`main` para el diccionario o `db-integration` para la base de datos).
 
 1.  **Clona el repositorio:**
 
