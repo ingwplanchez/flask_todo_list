@@ -107,7 +107,7 @@ Para poner en marcha `FlaskTasker` en tu máquina, sigue estas instrucciones. Re
 
     ```bash
     git clone https://github.com/ingwplanchez/flasktasker
-    cd flask_todo_list
+    cd flasktasker
     ```
 
  2.  **Elige y cambia a la rama deseada:**
