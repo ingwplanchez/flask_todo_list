@@ -33,6 +33,17 @@ Hasta el momento, `FlaskTasker` incluye las siguientes características clave:
 
 -----
 
+## Capturas de Pantalla
+Aquí puedes ver FlaskTasker en acción, mostrando sus diferentes vistas. 
+
+### Vista de Lista
+![alt text](screenshots/list_view.png)
+
+### Edición de Tarea
+![alt text](screenshots/edit_view.png)
+
+-----
+
 ## Estructura de Ramas y Persistencia de Datos
 
 Este proyecto utiliza ramas de Git para ofrecer diferentes implementaciones de cómo se almacenan las tareas:
@@ -95,13 +106,11 @@ Para poner en marcha `FlaskTasker` en tu máquina, sigue estas instrucciones. Re
 1.  **Clona el repositorio:**
 
     ```bash
-    git clone https://github.com/tu-usuario/flask_todo_list.git
-    cd flask_todo_list
+    git clone https://github.com/ingwplanchez/flasktasker
+    cd flasktasker
     ```
 
-    (Asegúrate de reemplazar `tu-usuario/flask_todo_list.git` con la URL real de tu repositorio).
-
-2.  **Elige y cambia a la rama deseada:**
+ 2.  **Elige y cambia a la rama deseada:**
 
       * Para usar la versión con base de datos:
         ```bash
